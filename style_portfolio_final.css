@@ -1,0 +1,59 @@
+/* ====== Estilos generales orientados a Data Analyst ====== */
+:root{
+  --bg-dark:#1b1b32;
+  --bg-hero:#0a0a23;
+}
+.navbar{ padding:1.25rem; background:#f5f6f7; }
+.navbar-collapse{ align-items:center; justify-content:space-between; }
+
+section{ display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.seccion-clara{ background:#fff; color:#000; }
+.seccion-oscura{ background:var(--bg-dark); color:#fff; }
+.seccion-titulo{ font-family:'Rubik Dirt', cursive; font-size:2rem; margin:0.25rem 0 0.75rem; }
+.seccion-descripcion{ color:#666; }
+.seccion-texto{ font-size:1.05rem; max-width:760px; }
+
+/* Hero */
+.hero{ background-color:#f5f6f7; text-align:center; }
+.hero-principal{ width:100%; padding:3rem 1.25rem; background:linear-gradient(135deg, var(--bg-hero), #1b1b32); }
+.hero-principal h1, .hero-principal h2, .hero-principal p{ color:#fff; }
+.hero-principal h1{ font-family:'Rubik Dirt', cursive; font-size:2.6rem; }
+.hero-principal h2{ font-family:'Rubik Dirt', cursive; font-size:1.9rem; }
+.hero-principal p{ font-family:'Share Tech Mono', monospace; }
+.hero-imagen{ width:190px; height:190px; border-radius:60%; margin:18px; object-fit:cover; }
+.hero-grafico{ max-width:620px; }
+
+/* Skills */
+.experiencia-titulo{ font-size:1.25rem; font-weight:700; margin:10px 0; }
+.columna{ padding:20px; border:2px solid #8080804d; border-radius:12px; display:flex; flex-direction:column; align-items:center; gap:.5rem; transition:.2s ease-in; }
+.columna:hover{ background:#0a0a23; color:#fff; }
+.columna i{ font-size:2rem; color:#fff; background:#0a0a23; padding:10px 16px; border-radius:50%; }
+.badges-contenedor{ display:flex; gap:.5rem; flex-wrap:wrap; }
+.badge{ font-weight:600; }
+
+/* Proyectos */
+.card-img-top{ height:180px; object-fit:cover; }
+.btn-info{ font-size:1.05rem; margin:18px; font-weight:700; }
+
+/* Contacto */
+#contacto .container{ max-width:1100px; min-height:200px; padding:20px; }
+#contacto .rectangulo{ margin-top:-5rem; background-color:rgb(13,110,253); border-radius:12px; box-shadow:0 1px 4px 1px rgba(0,0,0,.1); padding:20px; }
+#contacto .descripcion{ color:#fff; font-size:1.05rem; }
+#contacto button{ color:#fff; font-weight:700; background:transparent; border:2px solid #fff; padding:1.1em 2em; margin:10px; border-radius:100px; transition:.2s; }
+#contacto button:hover{ background:#fff; color:#000; }
+#contacto button i{ margin-left:.25rem; }
+
+/* Footer */
+footer{ min-height:320px; }
+.footer-logo{ height:64px; width:64px; margin:10px; }
+.footer-texto{ font-size:1.1rem; padding:16px; margin-bottom:16px; }
+.iconos-redes-sociales a{ width:44px; height:44px; display:flex; align-items:center; justify-content:center; padding:2px; margin:8px; border:2px solid #fff; border-radius:50%; transition:.2s; }
+.iconos-redes-sociales i{ color:#fff; font-size:1.25rem; }
+.iconos-redes-sociales a:hover{ background:#fff; border-color:rgb(13,110,253); }
+.iconos-redes-sociales a:hover i{ color:#000; }
+.derechos-de-autor{ font-size:14px; color:#aeaeae; padding:16px; }
+
+/* Responsive */
+@media (max-width:767px){ .navbar-brand{ display:none;} .hero-principal h1{ font-size:2.2rem;} .hero-principal h2{ font-size:1.5rem;} }
+@media (min-width:700px){ .hero-grafico{ max-width:620px;} }
+@media (max-width:400px){ .card-img-top{ height:140px; } }
