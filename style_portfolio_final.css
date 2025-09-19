@@ -57,3 +57,26 @@ footer{ min-height:320px; }
 @media (max-width:767px){ .navbar-brand{ display:none;} .hero-principal h1{ font-size:2.2rem;} .hero-principal h2{ font-size:1.5rem;} }
 @media (min-width:700px){ .hero-grafico{ max-width:620px;} }
 @media (max-width:400px){ .card-img-top{ height:140px; } }
+
+/* === Selector de idioma en la navbar === */
+.lang-select { 
+  min-width: 120px;              /* evita que se achique demasiado */
+}
+
+/* Apariencia consistente con la navbar clara */
+.navbar .form-select.form-select-sm.lang-select {
+  background-color: #fff;
+  border-color: rgba(0,0,0,.15);
+}
+
+/* Mejor foco accesible */
+.lang-select:focus,
+.lang-select:focus-visible {
+  box-shadow: 0 0 0 .15rem rgba(13,110,253,.25);
+  outline: none;
+}
+
+/* En el menú colapsado (mobile) que ocupe el ancho disponible */
+@media (max-width: 767.98px) {
+  .lang-select { width: 100%; }
+}
