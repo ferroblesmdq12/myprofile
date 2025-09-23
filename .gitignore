@@ -6,6 +6,4 @@
 ~$*.docm
 ~$*.doc
 
-# Archivos de imagenes
-*.png
-*.jpg
+
