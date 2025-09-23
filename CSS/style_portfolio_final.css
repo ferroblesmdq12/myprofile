@@ -21,7 +21,7 @@ section{ display:flex; flex-direction:column; align-items:center; justify-conten
 .hero-principal h2{ font-family:'Rubik Dirt', cursive; font-size:1.9rem; }
 .hero-principal p{ font-family:'Share Tech Mono', monospace; }
 .hero-imagen{ width:190px; height:190px; border-radius:60%; margin:18px; object-fit:cover; }
-.hero-grafico{ max-width:620px; }
+.hero-grafico{ max-width:920px; }
 
 /* Skills */
 .experiencia-titulo{ font-size:1.25rem; font-weight:700; margin:10px 0; }
@@ -55,7 +55,7 @@ footer{ min-height:320px; }
 
 /* Responsive */
 @media (max-width:767px){ .navbar-brand{ display:none;} .hero-principal h1{ font-size:2.2rem;} .hero-principal h2{ font-size:1.5rem;} }
-@media (min-width:700px){ .hero-grafico{ max-width:620px;} }
+@media (min-width:700px){ .hero-grafico{ max-width:720px;} }
 @media (max-width:400px){ .card-img-top{ height:140px; } }
 
 /* === Selector de idioma en la navbar === */
