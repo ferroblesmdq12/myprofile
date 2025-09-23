@@ -1,1 +1,11 @@
-.docx
+# Archivos de Word (ignorar en todo el repo)
+*.docx
+*.docm
+*.doc
+~$*.docx
+~$*.docm
+~$*.doc
+
+# Archivos de imagenes
+*.png
+*.jpg
