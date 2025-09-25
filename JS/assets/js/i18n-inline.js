@@ -1,3 +1,6 @@
+// funcionalidad para traducir a idiomas español|inglés/italiano/portugués 
+// usando un diccionario inline 
+
 // assets/js/i18n-inline.js
 (() => {
   // Utilidad: acceso a claves anidadas tipo "hero.hi"
@@ -117,6 +120,7 @@
     }
   };
 
+// FUNCIONES //
   function applyTranslations(lang) {
     const dict = I18N[lang] || I18N.es;
     document.documentElement.setAttribute('lang', lang);
