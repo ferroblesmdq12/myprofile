@@ -1,0 +1,5 @@
+body { background: #f8f9fa; }
+.contact-card { border: none; border-radius: 1rem; box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15); }
+.contact-card .card-title { font-weight: 600; }
+.btn-primary { background: linear-gradient(135deg, #007bff, #6610f2); border: none; }
+.btn-primary:hover { background: linear-gradient(135deg, #0056b3, #520dc2); }

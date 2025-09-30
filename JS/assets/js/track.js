@@ -1,3 +1,4 @@
+// Conectado con Google Apps Script para tracking básico de visitas 
 (function () {
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycby8Q4Thf7kO7_QKvz80QLa5vsBQdLRM03dODRzsmsZYsxcQF9L4WWJub5horZpDVCb2/exec';
   if (!ENDPOINT) return;
