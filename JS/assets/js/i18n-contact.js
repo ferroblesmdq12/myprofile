@@ -5,7 +5,7 @@
   const storedLang = localStorage.getItem('siteLang');
   const navigatorLang = (navigator.language || 'es').slice(0,2);
   const lang = (urlLang || storedLang || navigatorLang || 'es').toLowerCase();
-  const safeLang = ['es','en','it'].includes(lang) ? lang : 'es';
+  const safeLang = ['es','en','it', 'pt'].includes(lang) ? lang : 'es';
   document.documentElement.lang = safeLang;
   if (urlLang) localStorage.setItem('siteLang', safeLang);
 
@@ -58,7 +58,24 @@
       'contact.messageError': 'Per favore inserisci un messaggio.',
       'contact.send': 'Invia',
       'contact.close': 'Chiudi'
+    },
+    pt: {
+      'contact.title': 'Contato | Portfólio',
+      'contact.heading': 'Formulário de Contato',
+      'contact.success': 'Sua mensagem foi enviada com sucesso!',
+      'contact.name': 'Nome',
+      'contact.namePh': 'Seu nome',
+      'contact.nameError': 'Por favor, insira seu nome.',
+      'contact.email': 'Email',
+      'contact.emailPh': 'seu@email.com',
+      'contact.emailError': 'Por favor, insira um email válido (ex.: usuario@dominio.com).',
+      'contact.message': 'Nota',
+      'contact.messagePh': 'Escreva sua mensagem…',
+      'contact.messageError': 'Por favor, insira uma mensagem.',
+      'contact.send': 'Enviar',
+      'contact.close': 'Fechar'
     }
+
   };
   const t = dict[safeLang] || dict.es;
 
