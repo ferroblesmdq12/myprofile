@@ -1,3 +1,4 @@
+// JS/assets/js/contact.js
 (function () {
   'use strict';
   const form = document.getElementById('contactForm');
@@ -23,6 +24,8 @@
   form.addEventListener('submit', function (event) {
     event.preventDefault();
 
+    emailEl.value = emailEl.value.trim().toLowerCase();
+
     if (!form.checkValidity()) {
       event.stopPropagation();
       setValidity(nameEl, nameEl.checkValidity());
@@ -33,10 +36,10 @@
       alertSuccess.classList.remove('d-none');
       alertSuccess.classList.add('show');
 
-      // ocultarla automáticamente después de 5 s
+      // ocultar automáticamente después de 5 s (manteniendo el fade)
       setTimeout(() => {
         alertSuccess.classList.remove('show');
-        setTimeout(() => alertSuccess.classList.add('d-none'), 300); // espera la transición fade
+        setTimeout(() => alertSuccess.classList.add('d-none'), 300);
       }, 5000);
 
       // limpiar formulario y estados

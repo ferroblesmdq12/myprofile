@@ -1,5 +1,5 @@
-// funcionalidad para traducir a idiomas español|inglés/italiano/portugués 
-// usando un diccionario inline 
+// funcionalidad para traducir a idiomas español|inglés/italiano/portugués
+// usando un diccionario inline
 
 // JS/assets/js/i18n-inline.js
 (() => {
@@ -51,9 +51,29 @@
         }
       },
       notes: { title: 'Notas y repos', latest: 'Más recientes' },
+
+      // NUEVO: bloque específico para el formulario
+      contactForm: {
+        heading: "Formulario de Contacto",
+        success: "¡Tu mensaje fue enviado correctamente!",
+        name: "Nombre",
+        namePh: "Tu nombre",
+        nameError: "Por favor ingresa tu nombre.",
+        email: "Email",
+        emailPh: "tu@email.com",
+        emailError: "Por favor ingresa un email válido (ejemplo: usuario@dominio.com).",
+        message: "Nota",
+        messagePh: "Escribe tu mensaje...",
+        messageError: "Por favor ingresa un mensaje.",
+        send: "Enviar",
+        close: "Cerrar"
+      },
+
+      // este "contact" lo podés seguir usando para CTA/links del sitio
       contact: { title: '¡Hablemos!', desc: '¿Agendamos 15’ para hablar de tus KPIs? Respondo en 24h.', button: 'Contacto ' },
       footer: { quote: '“Los datos cuentan historias… yo ayudo a encontrarlas”.', rights: 'Creado por Fernando Robles (2025) ©' }
     },
+
     en: {
       nav: { about: 'About', projects: 'Projects', skills: 'Skills', contact: 'Contact' },
       cta: { downloadCV: 'Download CV', viewProjects: 'View projects', letsTalk: "Let's talk" },
@@ -96,9 +116,27 @@
         }
       },
       notes: { title: 'Notes & repos', latest: 'Latest' },
+
+      contactForm: {
+        heading: "Contact Form",
+        success: "Your message was sent successfully!",
+        name: "Name",
+        namePh: "Your name",
+        nameError: "Please enter your name.",
+        email: "Email",
+        emailPh: "you@email.com",
+        emailError: "Please enter a valid email (e.g. user@domain.com).",
+        message: "Note",
+        messagePh: "Write your message...",
+        messageError: "Please enter a message.",
+        send: "Send",
+        close: "Close"
+      },
+
       contact: { title: "Let's talk!", desc: "Shall we schedule 15' to discuss your KPIs? I reply within 24h.", button: 'Contact ' },
       footer: { quote: '“Data tells stories… I help you find them.”', rights: 'Created by Fernando Robles (2025) ©' }
     },
+
     it: {
       nav: { about: 'Chi sono', projects: 'Progetti', skills: 'Competenze', contact: 'Contatti' },
       cta: { downloadCV: 'Scarica CV', viewProjects: 'Vedi progetti', letsTalk: 'Parliamo' },
@@ -141,9 +179,27 @@
         }
       },
       notes: { title: 'Note e repo', latest: 'Più recenti' },
+
+      contactForm: {
+        heading: "Modulo di Contatto",
+        success: "Il tuo messaggio è stato inviato con successo!",
+        name: "Nome",
+        namePh: "Il tuo nome",
+        nameError: "Per favore inserisci il tuo nome.",
+        email: "Email",
+        emailPh: "tu@email.com",
+        emailError: "Per favore inserisci un’email valida (es. utente@dominio.com).",
+        message: "Nota",
+        messagePh: "Scrivi il tuo messaggio...",
+        messageError: "Per favore inserisci un messaggio.",
+        send: "Invia",
+        close: "Chiudi"
+      },
+
       contact: { title: 'Parliamo!', desc: 'Fissiamo 15’ per parlare dei tuoi KPI? Rispondo entro 24h.', button: 'Contatto ' },
       footer: { quote: '“I dati raccontano storie… io aiuto a trovarle”.', rights: 'Creato da Fernando Robles (2025) ©' }
     },
+
     pt: {
       nav: { about: 'Sobre mim', projects: 'Projetos', skills: 'Skills', contact: 'Contato' },
       cta: { downloadCV: 'Baixar CV', viewProjects: 'Ver projetos', letsTalk: 'Vamos conversar' },
@@ -180,21 +236,27 @@
         }
       },
       notes: { title: 'Notas e repositórios', latest: 'Mais recentes' },
+
+      contactForm: {
+        heading: "Formulário de Contato",
+        success: "Sua mensagem foi enviada com sucesso!",
+        name: "Nome",
+        namePh: "Seu nome",
+        nameError: "Por favor, insira seu nome.",
+        email: "Email",
+        emailPh: "seu@email.com",
+        emailError: "Por favor, insira um email válido (ex.: usuario@dominio.com).",
+        message: "Nota",
+        messagePh: "Escreva sua mensagem...",
+        messageError: "Por favor, insira uma mensagem.",
+        send: "Enviar",
+        close: "Fechar"
+      },
+
       contact: { title: 'Vamos conversar!', desc: 'Marcamos 15’ para falar dos seus KPIs? Respondo em até 24h.', button: 'Contato ' },
       footer: { quote: '“Os dados contam histórias… eu ajudo a encontrá-las”.', rights: 'Criado por Fernando Robles (2025) ©' }
     }
   };
-
-  function rewriteContactLinks(lang) {
-    const links = document.querySelectorAll('[data-contact-link], a[href$="contacto.html"], a[href*="contacto.html?"]');
-    links.forEach(a => {
-      const baseHref = a.getAttribute('href') || 'contacto.html';
-      const u = new URL(baseHref, window.location.origin);
-      u.searchParams.set('lang', lang);
-      // dejar href relativo (útil en GitHub Pages)
-      a.setAttribute('href', u.pathname.replace(window.location.origin, '') + u.search);
-    });
-  }
 
   function applyTranslations(lang) {
     const dict = I18N[lang] || I18N.es;
@@ -204,18 +266,33 @@
       const key = el.getAttribute('data-i18n');
       const val = getByPath(dict, key);
       if (typeof val === 'string') {
+        // permite HTML en valores con tags (ej: hero.pitch)
         if (val.includes('<') && val.includes('>')) el.innerHTML = val;
         else el.textContent = val;
       }
     });
 
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      const val = getByPath(dict, key);
+      if (typeof val === 'string') el.setAttribute('placeholder', val);
+    });
+
+    // aria-label del botón cerrar del alert de contacto
+    const closeBtn = document.querySelector('#alertSuccess .btn-close');
+    const closeText = getByPath(dict, 'contactForm.close');
+    if (closeBtn && closeText) closeBtn.setAttribute('aria-label', closeText);
+
     try { localStorage.setItem('siteLang', lang); } catch {}
 
+    // reflejar en URL (sin recargar)
     const url = new URL(window.location);
     url.searchParams.set('lang', lang);
     window.history.replaceState({}, '', url);
 
-    rewriteContactLinks(lang);
+    // sin rutas a contacto.html (single-page): solo sincronizamos el select
+    const sel = document.getElementById('langSwitcher');
+    if (sel && sel.value !== lang) sel.value = lang;
   }
 
   function detectLanguage() {
@@ -231,10 +308,10 @@
   document.addEventListener('DOMContentLoaded', () => {
     const langSelect = document.getElementById('langSwitcher');
     const lang = detectLanguage();
-    if (langSelect) langSelect.value = lang;
     applyTranslations(lang);
-    if (langSelect) langSelect.addEventListener('change', e => applyTranslations(e.target.value));
+    if (langSelect) {
+      langSelect.value = lang;
+      langSelect.addEventListener('change', e => applyTranslations(e.target.value));
+    }
   });
 })();
-
-

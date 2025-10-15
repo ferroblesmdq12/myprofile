@@ -258,57 +258,59 @@
   </section>
 
   <!-- Contacto (formulario integrado) -->
-  <section id="contacto" class="seccion-oscura py-5">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-          <div class="card contact-card">
-            <div class="card-body p-4">
-              <h2 class="card-title text-center mb-4" data-i18n="contact.heading">Formulario de Contacto</h2>
+<section id="contacto" class="seccion-oscura py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card contact-card">
+          <div class="card-body p-4">
+            <h2 class="card-title text-center mb-4" data-i18n="contactForm.heading">Formulario de Contacto</h2>
 
-              <!-- Alerta de confirmación con botón de cerrar -->
-              <div id="alertSuccess" class="alert alert-success alert-dismissible fade d-none" role="alert">
-                <span data-i18n="contact.success">¡Tu mensaje fue enviado correctamente!</span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            <!-- Alerta de confirmación con botón de cerrar -->
+            <div id="alertSuccess" class="alert alert-success alert-dismissible fade d-none" role="alert">
+              <span data-i18n="contactForm.success">¡Tu mensaje fue enviado correctamente!</span>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+
+            <form id="contactForm" novalidate>
+              <div class="mb-3">
+                <label for="name" class="form-label" data-i18n="contactForm.name">Nombre</label>
+                <input type="text" class="form-control" id="name"
+                       placeholder="Tu nombre" data-i18n-placeholder="contactForm.namePh" required>
+                <div class="invalid-feedback" data-i18n="contactForm.nameError">Por favor ingresa tu nombre.</div>
               </div>
 
-              <form id="contactForm" novalidate>
-                <div class="mb-3">
-                  <label for="name" class="form-label" data-i18n="contact.name">Nombre</label>
-                  <input type="text" class="form-control" id="name" placeholder="Tu nombre" data-i18n-placeholder="contact.namePh" required>
-                  <div class="invalid-feedback" data-i18n="contact.nameError">Por favor ingresa tu nombre.</div>
+              <div class="mb-3">
+                <label for="email" class="form-label" data-i18n="contactForm.email">Email</label>
+                <input type="email" class="form-control" id="email"
+                       placeholder="tu@email.com"
+                       data-i18n-placeholder="contactForm.emailPh"
+                       required autocomplete="email" inputmode="email" spellcheck="false">
+                <div class="invalid-feedback" data-i18n="contactForm.emailError">
+                  Por favor ingresa un email válido (ejemplo: usuario@dominio.com).
                 </div>
+              </div>
 
-                <div class="mb-3">
-                  <label for="email" class="form-label" data-i18n="contact.email">Email</label>
-                  <input type="email" class="form-control" id="email"
-                      placeholder="tu@email.com"
-                      data-i18n-placeholder="contact.emailPh"
-                      required autocomplete="email" inputmode="email" spellcheck="false">
-                  <div class="invalid-feedback" data-i18n="contact.emailError">
-                    Por favor ingresa un email válido (ejemplo: usuario@dominio.com).
-                  </div>
-                </div>
+              <div class="mb-3">
+                <label for="message" class="form-label" data-i18n="contactForm.message">Nota</label>
+                <textarea class="form-control" id="message" rows="5"
+                          placeholder="Escribe tu mensaje..."
+                          data-i18n-placeholder="contactForm.messagePh" required></textarea>
+                <div class="invalid-feedback" data-i18n="contactForm.messageError">Por favor ingresa un mensaje.</div>
+              </div>
 
-                <div class="mb-3">
-                  <label for="message" class="form-label" data-i18n="contact.message">Nota</label>
-                  <textarea class="form-control" id="message" rows="5"
-                            placeholder="Escribe tu mensaje..."
-                            data-i18n-placeholder="contact.messagePh" required></textarea>
-                  <div class="invalid-feedback" data-i18n="contact.messageError">Por favor ingresa un mensaje.</div>
-                </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg" data-i18n="contactForm.send">Enviar</button>
+              </div>
+            </form>
 
-                <div class="d-grid">
-                  <button type="submit" class="btn btn-primary btn-lg" data-i18n="contact.send">Enviar</button>
-                </div>
-              </form>
-
-            </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- Footer -->
   <footer class="seccion-oscura d-flex flex-column align-items-center justify-content-center">
