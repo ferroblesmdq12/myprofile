@@ -35,43 +35,46 @@
   nameEl.addEventListener('input', () => setValidity(nameEl, nameEl.checkValidity()));
   msgEl.addEventListener('input', () => setValidity(msgEl, msgEl.checkValidity()));
 
-  form.addEventListener('submit', async function (event) {
-    event.preventDefault();
+  // JS/assets/js/contact.js (solo el bloque del submit)
+form.addEventListener('submit', async function (event) {
+  event.preventDefault();
 
-    // Normalizo email
-    emailEl.value = emailEl.value.trim().toLowerCase();
+  emailEl.value = emailEl.value.trim().toLowerCase();
 
-    // Si hay errores de HTML5, marco y salgo
-    if (!form.checkValidity()) {
-      event.stopPropagation();
-      setValidity(nameEl, nameEl.checkValidity());
-      setValidity(emailEl, emailEl.checkValidity());
-      setValidity(msgEl, msgEl.checkValidity());
-      form.classList.add('was-validated');
-      return;
-    }
+  if (!form.checkValidity()) {
+    event.stopPropagation();
+    setValidity(nameEl, nameEl.checkValidity());
+    setValidity(emailEl, emailEl.checkValidity());
+    setValidity(msgEl, msgEl.checkValidity());
+    form.classList.add('was-validated');
+    return;
+  }
 
-    // Payload para GAS
-    const payload = {
-      name: nameEl.value.trim(),
-      email: emailEl.value.trim(),
-      message: msgEl.value.trim(),
-      lang: document.documentElement.lang || 'es',
-      ua: navigator.userAgent,
-      ref: document.referrer || '',
-      path: location.pathname + location.search
-    };
+  // Enviar como "form-data" (NO headers → NO preflight)
+  const fd = new FormData();
+  fd.append('name', nameEl.value.trim());
+  fd.append('email', emailEl.value.trim());
+  fd.append('message', msgEl.value.trim());
+  fd.append('lang', document.documentElement.lang || 'es');
+  fd.append('ua', navigator.userAgent);
+  fd.append('ref', document.referrer || '');
+  fd.append('path', location.pathname + location.search);
 
-    try {
-      // Envío a Google Apps Script
-      // Si te aparece error de CORS:
-      // 1) publicá el Web App como "Cualquiera con el enlace"
-      // 2) si persiste, probá el plan B comentado debajo
-      const res = await fetch(GAS_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+  try {
+    await fetch(GAS_URL, { method: 'POST', body: fd });
+
+    // éxito UX
+    alertSuccess.classList.remove('d-none'); alertSuccess.classList.add('show');
+    setTimeout(()=>{ alertSuccess.classList.remove('show'); setTimeout(()=>alertSuccess.classList.add('d-none'),300); }, 5000);
+
+    form.reset();
+    [nameEl, emailEl, msgEl].forEach(el => { el.classList.remove('is-valid','is-invalid'); el.removeAttribute('aria-invalid'); });
+    form.classList.remove('was-validated');
+  } catch (err) {
+    console.error('Error enviando a GAS:', err);
+  }
+});
+
 
       // --- Plan B (CORS): ---
       // const res = await fetch(GAS_URL, {
