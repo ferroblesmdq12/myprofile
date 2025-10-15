@@ -4,7 +4,7 @@
 
   // ⚠️ Pega acá la URL real de tu Web App de Google Apps Script:
   // Ej.: https://script.google.com/macros/s/AKfycbXXXXXXXXXXXX/exec
-  const GAS_URL = 'https://script.google.com/d/1Em0Mme38IBhozWWAUTs0lS5Ub66xm_ty9y3zkbMDBo08XDDR8MvAmN1K/edit?usp=sharing';
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwImTgG_71GPfs6VX0o9cJP6GJ8jILhsb4hPC9Ucd3M7n_WHDJNYSWDIqy8KjXngTW_/exec';
 
   const form = document.getElementById('contactForm');
   const alertSuccess = document.getElementById('alertSuccess');
