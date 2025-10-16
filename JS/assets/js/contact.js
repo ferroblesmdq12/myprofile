@@ -3,7 +3,7 @@
   'use strict';
 
   // URL pública del Web App (debe terminar en /exec)
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwB4C7FO0UVR2Y5ifGzsySoLRMLB2gjwqwNFjTOaVvHNVxDOIzX-BzrqzgMFD7S0NOd/exec';
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbxXtOF4usCEMj2Ny3gCbV9XcPMJLcp2TXtVlX2iMp_QNCTpgXQ0Vk1xjw66WmWQOxIc/exec';
 
   function ready(fn) {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
