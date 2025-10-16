@@ -2,102 +2,122 @@
 (function () {
   'use strict';
 
-  // ⚠️ TU URL del Web App (termina en /exec)
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwImTgG_71GPfs6VX0o9cJP6GJ8jILhsb4hPC9Ucd3M7n_WHDJNYSWDIqy8KjXngTW_/exec';
+  // URL pública del Web App (termina en /exec)
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwB4C7FO0UVR2Y5ifGzsySoLRMLB2gjwqwNFjTOaVvHNVxDOIzX-BzrqzgMFD7S0NOd/exec';
 
-  function ready(fn) {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', fn);
-    } else {
-      fn();
-    }
+  // Elementos del formulario
+  const form = document.getElementById('contactForm');
+  const alertSuccess = document.getElementById('alertSuccess');
+  const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+
+  if (!form) {
+    console.error('[contact.js] No se encontró #contactForm en la página.');
+    return;
   }
 
-  ready(() => {
-    // QA: avisar si el archivo cargó
-    console.log('[contact.js] loaded');
+  // Utilidad: limpiar clases de validación tras éxito
+  function limpiarValidaciones() {
+    form.classList.remove('was-validated');
+    form.querySelectorAll('.form-control, .form-select, textarea, input').forEach(el => {
+      el.classList.remove('is-valid', 'is-invalid');
+      if (typeof el.setCustomValidity === 'function') el.setCustomValidity('');
+      el.removeAttribute('aria-invalid');
+    });
+  }
 
-    const form = document.getElementById('contactForm');
-    const alertSuccess = document.getElementById('alertSuccess');
-    const nameEl = document.getElementById('name');
-    const emailEl = document.getElementById('email');
-    const msgEl = document.getElementById('message');
+  // Mostrar alerta de éxito (Bootstrap) y auto-ocultar
+  function mostrarExito() {
+    if (!alertSuccess) return;
+    alertSuccess.classList.remove('d-none');
+    alertSuccess.classList.add('show');
+    // Auto-ocultar en 6s si el usuario no la cierra
+    setTimeout(() => {
+      // usa la API de Bootstrap si existe; si no, oculta a mano
+      try {
+        const bsAlert = bootstrap.Alert.getOrCreateInstance(alertSuccess);
+        bsAlert.close();
+      } catch {
+        alertSuccess.classList.add('d-none');
+        alertSuccess.classList.remove('show');
+      }
+    }, 6000);
+  }
 
-    // QA: detectar si no existe el form (ruta de script mal, ID distinto, etc.)
-    if (!form || !alertSuccess || !nameEl || !emailEl || !msgEl) {
-      console.error('[contact.js] No se encontró algún elemento del formulario. ¿IDs correctos? ¿El script se está cargando?');
+  // Validador simple adicional para email (deja pasar .com, .ar, .es, etc.)
+  function emailBasicoOk(value) {
+    const re = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    return re.test(String(value || '').trim());
+  }
+
+  // Submit
+  form.addEventListener('submit', async (event) => {
+    // HTML5 validation primero
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      form.classList.add('was-validated');
       return;
     }
 
-    function setValidity(el, isValid) {
-      el.classList.toggle('is-valid', isValid);
-      el.classList.toggle('is-invalid', !isValid);
-      el.setAttribute('aria-invalid', String(!isValid));
+    event.preventDefault(); // no recargar
+
+    // Campos
+    const nameEl = document.getElementById('name');
+    const emailEl = document.getElementById('email');
+    const messageEl = document.getElementById('message');
+
+    const name = (nameEl?.value || '').trim();
+    const email = (emailEl?.value || '').trim().toLowerCase();
+    const message = (messageEl?.value || '').trim();
+
+    // Validación extra de email
+    if (!emailBasicoOk(email)) {
+      form.classList.add('was-validated');
+      emailEl?.classList.add('is-invalid');
+      return;
     }
 
-    function showSuccessAlert() {
-      alertSuccess.classList.remove('d-none');
-      alertSuccess.classList.add('show');
-      setTimeout(() => {
-        alertSuccess.classList.remove('show');
-        setTimeout(() => alertSuccess.classList.add('d-none'), 300);
-      }, 5000);
+    // Deshabilitar botón mientras se envía
+    const originalText = submitBtn ? submitBtn.innerHTML : '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.setAttribute('aria-busy', 'true');
+      submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Enviando…`;
     }
 
-    // Validación en vivo
-    emailEl.addEventListener('input', () => {
-      emailEl.value = emailEl.value.trim().toLowerCase();
-      setValidity(emailEl, emailEl.checkValidity());
-    });
-    nameEl.addEventListener('input', () => setValidity(nameEl, nameEl.checkValidity()));
-    msgEl.addEventListener('input', () => setValidity(msgEl, msgEl.checkValidity()));
+    // Armar payload (FormData) compatible con tu Apps Script
+    const fd = new FormData();
+    fd.append('name', name);
+    fd.append('email', email);
+    fd.append('message', message);
+    fd.append('lang', document.documentElement.lang || 'es');
+    fd.append('ua', navigator.userAgent || '');
+    fd.append('ref', document.referrer || '');
+    fd.append('path', location.pathname || '');
 
-    // Enviar → Google Apps Script (FormData evita preflight CORS)
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
+    try {
+      // Enviar a GAS. Usamos no-cors: la respuesta será opaca, pero el Script recibe OK.
+      await fetch(GAS_URL, {
+        method: 'POST',
+        body: fd,
+        mode: 'no-cors'
+      });
 
-      emailEl.value = emailEl.value.trim().toLowerCase();
+      // UX de éxito local
+      mostrarExito();
+      form.reset();
+      limpiarValidaciones();
 
-      if (!form.checkValidity()) {
-        event.stopPropagation();
-        setValidity(nameEl, nameEl.checkValidity());
-        setValidity(emailEl, emailEl.checkValidity());
-        setValidity(msgEl, msgEl.checkValidity());
-        form.classList.add('was-validated');
-        console.warn('[contact.js] Form inválido: corrige los campos marcados.');
-        return;
+    } catch (err) {
+      console.error('[contact.js] Error al enviar a GAS:', err);
+      // Si querés, acá podrías mostrar una alerta de error en el DOM.
+      // Por ahora no interrumpimos la UI de éxito a menos que quieras lo contrario.
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.removeAttribute('aria-busy');
+        submitBtn.innerHTML = originalText;
       }
-
-      const fd = new FormData();
-      fd.append('name', nameEl.value.trim());
-      fd.append('email', emailEl.value.trim());
-      fd.append('message', msgEl.value.trim());
-      fd.append('lang', document.documentElement.lang || 'es');
-      fd.append('ua', navigator.userAgent);
-      fd.append('ref', document.referrer || '');
-      fd.append('path', location.pathname + location.search);
-
-      try {
-        const res = await fetch(GAS_URL, { method: 'POST', body: fd });
-        // En modo FormData + GAS, res.ok puede no estar disponible (según CORS),
-        // pero el envío igual llega al script. Mostramos éxito UX siempre que no haya excepción.
-        console.log('[contact.js] Enviado a GAS:', res && res.status);
-
-        showSuccessAlert();
-
-        form.reset();
-        [nameEl, emailEl, msgEl].forEach(el => {
-          el.classList.remove('is-valid', 'is-invalid');
-          el.removeAttribute('aria-invalid');
-        });
-        form.classList.remove('was-validated');
-
-      } catch (err) {
-        console.error('[contact.js] Error enviando a GAS:', err);
-        alert('Hubo un problema al enviar el mensaje. Intenta nuevamente más tarde.');
-      }
-    });
-  });
+    }
+  }, false);
 })();
-
-
