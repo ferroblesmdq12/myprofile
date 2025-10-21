@@ -1,6 +1,7 @@
 (() => {
   // 👉 Tu URL de la Web App (de Apps Script)
   const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwwhVfkGW7tj8zs_52e27yss-v0e1rG48cHAudDOkqBQqFqyGZzEOJ_26cXD4Zk6Cs/exec";
+
 https://script
   // Referencias a los elementos del formulario
   const form        = document.getElementById("contactForm");
