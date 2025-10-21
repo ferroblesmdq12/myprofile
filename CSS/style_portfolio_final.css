@@ -80,3 +80,31 @@ footer{ min-height:320px; }
 @media (max-width: 767.98px) {
   .lang-select { width: 100%; }
 }
+
+/* === Estilo del botón de envío del formulario === */
+#contactForm button[type="submit"] {
+ 
+  display: block;
+  width: 100%;
+  padding: 1rem 1.4rem;         /* 🔸 más alto y cómodo */
+  font-size: 1.2rem;            /* 🔸 texto más grande */
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  background-color: #0d6efd;    /* azul base Bootstrap */
+  color: #fff;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* 🔸 sombra leve */
+}
+
+/* Efecto al pasar el mouse */
+#contactForm button[type="submit"]:hover {
+  background-color: #3d8bfd; /* tono más claro */
+  cursor: pointer;
+}
+
+/* Efecto al presionar */
+#contactForm button[type="submit"]:active {
+  background-color: #0a58ca; /* tono más oscuro */
+  transform: scale(0.98); /* leve hundimiento */
+}
