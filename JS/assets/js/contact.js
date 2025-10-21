@@ -2,7 +2,6 @@
   // 👉 Tu URL de la Web App (de Apps Script)
   const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwwhVfkGW7tj8zs_52e27yss-v0e1rG48cHAudDOkqBQqFqyGZzEOJ_26cXD4Zk6Cs/exec";
 
-https://script
   // Referencias a los elementos del formulario
   const form        = document.getElementById("contactForm");
   const nameEl      = document.getElementById("name");
@@ -19,7 +18,7 @@ https://script
   potEl.style.display = "none";
   form.appendChild(potEl);
 
-  // Funciones auxiliares
+  // Validación básica
   const emailOK = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v).toLowerCase());
 
   const showSuccess = () => {
@@ -29,7 +28,7 @@ https://script
       try {
         const bsAlert = bootstrap.Alert.getOrCreateInstance(alertSuccess);
         bsAlert.close();
-      } catch { /* nada */ }
+      } catch {}
     }, 6000);
   };
 
@@ -37,28 +36,24 @@ https://script
     alert(msg || "No se pudo enviar el formulario. Intenta nuevamente.");
   };
 
-  // Validación y envío
+  // Evento submit
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Limpieza visual
     [nameEl, emailEl, messageEl].forEach(el => el.classList.remove("is-invalid"));
 
-    // Validaciones
     const name = nameEl.value.trim();
     const email = emailEl.value.trim();
     const message = messageEl.value.trim();
 
     let hasError = false;
-    if (!name)   { nameEl.classList.add("is-invalid");   hasError = true; }
+    if (!name) { nameEl.classList.add("is-invalid"); hasError = true; }
     if (!email || !emailOK(email)) { emailEl.classList.add("is-invalid"); hasError = true; }
-    if (!message){ messageEl.classList.add("is-invalid");hasError = true; }
+    if (!message) { messageEl.classList.add("is-invalid"); hasError = true; }
     if (hasError) return;
 
-    // Si el honeypot se llena (bot), cancelamos
-    if (potEl.value) return;
+    if (potEl.value) return; // Bot detectado
 
-    // UI feedback
     const prevText = sendBtn.textContent;
     sendBtn.disabled = true;
     sendBtn.textContent = "Enviando...";
@@ -72,7 +67,11 @@ https://script
       fd.append("userAgent", navigator.userAgent || "");
       fd.append("company", potEl.value || "");
 
-      const resp = await fetch(WEB_APP_URL, { method: "POST", body: fd });
+      const resp = await fetch(WEB_APP_URL, {
+        method: "POST",
+        body: fd
+      });
+
       let data = {};
       try { data = await resp.json(); } catch(_) {}
 
