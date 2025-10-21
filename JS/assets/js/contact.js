@@ -1,93 +1,92 @@
-// JS/assets/js/contact.js
-(function () {
-  'use strict';
+(() => {
+  // 👉 Tu URL de la Web App (de Apps Script)
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwwhVfkGW7tj8zs_52e27yss-v0e1rG48cHAudDOkqBQqFqyGZzEOJ_26cXD4Zk6Cs/exec";
+https://script
+  // Referencias a los elementos del formulario
+  const form        = document.getElementById("contactForm");
+  const nameEl      = document.getElementById("name");
+  const emailEl     = document.getElementById("email");
+  const messageEl   = document.getElementById("message");
+  const sendBtn     = form.querySelector("button[type='submit']");
+  const alertSuccess= document.getElementById("alertSuccess");
 
-  // URL pública del Web App (debe terminar en /exec)
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbxXtOF4usCEMj2Ny3gCbV9XcPMJLcp2TXtVlX2iMp_QNCTpgXQ0Vk1xjw66WmWQOxIc/exec';
+  // Creamos un honeypot oculto para bots (aunque no esté en HTML)
+  const potEl = document.createElement("input");
+  potEl.type = "text";
+  potEl.name = "company";
+  potEl.id = "company";
+  potEl.style.display = "none";
+  form.appendChild(potEl);
 
-  function ready(fn) {
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
-    else fn();
-  }
+  // Funciones auxiliares
+  const emailOK = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v).toLowerCase());
 
-  ready(() => {
-    const form = document.getElementById('contactForm');
-    if (!form) return;
-
-    const alertSuccess = document.getElementById('alertSuccess');
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const nameEl = document.getElementById('name');
-    const emailEl = document.getElementById('email');
-    const msgEl = document.getElementById('message');
-
-    // Helpers de validación
-    const emailBasic = v => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(v||'').trim());
-    function setValidity(el, ok){ el.classList.toggle('is-invalid', !ok); el.classList.toggle('is-valid', ok); el.setAttribute('aria-invalid', String(!ok)); }
-    function limpiarValidaciones(){
-      form.classList.remove('was-validated');
-      form.querySelectorAll('.form-control, .form-select, textarea, input').forEach(el=>{
-        el.classList.remove('is-valid','is-invalid'); el.removeAttribute('aria-invalid');
-        if (typeof el.setCustomValidity==='function') el.setCustomValidity('');
-      });
-    }
-    function showSuccessAlert(){
-      if(!alertSuccess) return;
-      alertSuccess.classList.remove('d-none'); alertSuccess.classList.add('show');
-      setTimeout(()=>{ try{ bootstrap.Alert.getOrCreateInstance(alertSuccess).close(); }catch{ alertSuccess.classList.add('d-none'); alertSuccess.classList.remove('show'); } }, 6000);
-    }
-
-    // Validación en vivo
-    emailEl.addEventListener('input', ()=>{ emailEl.value = emailEl.value.trim().toLowerCase(); setValidity(emailEl, emailEl.checkValidity() && emailBasic(emailEl.value)); });
-    nameEl.addEventListener('input', ()=> setValidity(nameEl, nameEl.checkValidity()));
-    msgEl.addEventListener('input', ()=> setValidity(msgEl, msgEl.checkValidity()));
-
-    form.addEventListener('submit', async (e)=>{
-      // HTML5 primero
-      if(!form.checkValidity() || !emailBasic(emailEl.value)){
-        e.preventDefault(); e.stopPropagation();
-        form.classList.add('was-validated');
-        setValidity(emailEl, emailEl.checkValidity() && emailBasic(emailEl.value));
-        return;
-      }
-
-      e.preventDefault();
-
-      // Deshabilitar botón y spinner
-      const original = submitBtn ? submitBtn.innerHTML : '';
-      if(submitBtn){
-        submitBtn.disabled = true; submitBtn.setAttribute('aria-busy','true');
-        submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Enviando…`;
-      }
-
-      // Honeypot opcional (descomenta si agregás <input id="company"...> oculto)
-      // const company = (document.getElementById('company')?.value || '').trim();
-      // if (company) { if(submitBtn){ submitBtn.disabled=false; submitBtn.removeAttribute('aria-busy'); submitBtn.innerHTML=original; } return; }
-
-      // Payload → GAS (FormData)
-      const fd = new FormData();
-      fd.append('name', nameEl.value.trim());
-      fd.append('email', emailEl.value.trim().toLowerCase());
-      fd.append('message', msgEl.value.trim());
-      fd.append('lang', document.documentElement.lang || 'es');
-      fd.append('ua', navigator.userAgent || '');
-      fd.append('ref', document.referrer || '');
-      fd.append('path', location.pathname + location.search);
-
+  const showSuccess = () => {
+    alertSuccess.classList.remove("d-none");
+    alertSuccess.classList.add("show");
+    setTimeout(() => {
       try {
-        // no-cors: respuesta opaca, pero el Apps Script recibe OK
-        await fetch(GAS_URL, { method:'POST', body: fd, mode:'no-cors' });
-        console.log('[contact.js] Enviado a GAS (respuesta opaca por no-cors)');
-        showSuccessAlert();
+        const bsAlert = bootstrap.Alert.getOrCreateInstance(alertSuccess);
+        bsAlert.close();
+      } catch { /* nada */ }
+    }, 6000);
+  };
+
+  const showError = (msg) => {
+    alert(msg || "No se pudo enviar el formulario. Intenta nuevamente.");
+  };
+
+  // Validación y envío
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Limpieza visual
+    [nameEl, emailEl, messageEl].forEach(el => el.classList.remove("is-invalid"));
+
+    // Validaciones
+    const name = nameEl.value.trim();
+    const email = emailEl.value.trim();
+    const message = messageEl.value.trim();
+
+    let hasError = false;
+    if (!name)   { nameEl.classList.add("is-invalid");   hasError = true; }
+    if (!email || !emailOK(email)) { emailEl.classList.add("is-invalid"); hasError = true; }
+    if (!message){ messageEl.classList.add("is-invalid");hasError = true; }
+    if (hasError) return;
+
+    // Si el honeypot se llena (bot), cancelamos
+    if (potEl.value) return;
+
+    // UI feedback
+    const prevText = sendBtn.textContent;
+    sendBtn.disabled = true;
+    sendBtn.textContent = "Enviando...";
+
+    try {
+      const fd = new FormData();
+      fd.append("name", name);
+      fd.append("email", email);
+      fd.append("message", message);
+      fd.append("page", location.href);
+      fd.append("userAgent", navigator.userAgent || "");
+      fd.append("company", potEl.value || "");
+
+      const resp = await fetch(WEB_APP_URL, { method: "POST", body: fd });
+      let data = {};
+      try { data = await resp.json(); } catch(_) {}
+
+      if (resp.ok && data.ok) {
         form.reset();
-        limpiarValidaciones();
-      } catch (err) {
-        console.error('[contact.js] Error enviando a GAS:', err);
-        alert('Hubo un problema al enviar el mensaje. Intenta nuevamente más tarde.');
-      } finally {
-        if(submitBtn){
-          submitBtn.disabled = false; submitBtn.removeAttribute('aria-busy'); submitBtn.innerHTML = original;
-        }
+        showSuccess();
+      } else {
+        showError(data.error || "No se pudo enviar el mensaje.");
       }
-    });
+    } catch (err) {
+      console.error(err);
+      showError("Error de red. Intenta nuevamente.");
+    } finally {
+      sendBtn.disabled = false;
+      sendBtn.textContent = prevText;
+    }
   });
 })();
