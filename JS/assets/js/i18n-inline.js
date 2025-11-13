@@ -48,6 +48,12 @@
           b1: 'Análisis de la base de datos Adventure Works (empresa ficticia de bicicletas y accesorios).',
           b2: 'Objetivo: modelo analítico global y regional para entender el negocio y mejorar decisiones.',
           b3: 'Herramientas: SQL Server, Power Query, Power BI y storytelling de KPIs.'
+        },
+        partners: {
+        title: 'Partners Systems — Dashboard',
+        b1: 'Dashboard creado en Streamlit y Base de Datos en la nube.',
+        b2: 'Métricas de partners por países, plan comercial, partners activos/inactivos y cantidad de notificaciones.',
+        b3: 'Modelo de ML para obtener la tasa de Churn Real y gráficos de distribución. Top 10 partners con mayor probabilidad de churn.'
         }
       },
       notes: { title: 'Notas y repos', latest: 'Más recientes' },
@@ -113,6 +119,12 @@
           b1: 'Analysis of the Adventure Works database (fictional bicycle & accessories company).',
           b2: 'Goal: global and regional analytics model to understand the business and improve decision-making.',
           b3: 'Tools: SQL Server, Power Query, Power BI and KPI storytelling.'
+        },
+        partners: {
+          title: 'Partners Systems — Dashboard',
+          b1: 'Dashboard built with Streamlit and cloud-based Database.',
+          b2: 'Metrics by country, commercial plan, active/inactive partners, and number of notifications.',
+          b3: 'Machine Learning model to estimate Real Churn Rate and distribution charts. Top 10 partners with highest churn probability.'
         }
       },
       notes: { title: 'Notes & repos', latest: 'Latest' },
@@ -176,7 +188,14 @@
           b1: 'Analisi del database Adventure Works (azienda fittizia di biciclette e accessori).',
           b2: 'Obiettivo: modello analitico globale e regionale per comprendere il business e migliorare le decisioni.',
           b3: 'Strumenti: SQL Server, Power Query, Power BI e storytelling dei KPI.'
+        },
+        partners: {
+         title: 'Partners Systems — Dashboard',
+          b1: 'Dashboard creato con Streamlit e un database nel cloud.',
+          b2: 'Metriche per paese, piano commerciale, partner attivi/inattivi e numero di notifiche.',
+          b3: 'Modello di Machine Learning per stimare il tasso di Churn reale e grafici di distribuzione. Top 10 partner con maggiore probabilità di churn.'
         }
+
       },
       notes: { title: 'Note e repo', latest: 'Più recenti' },
 
@@ -233,6 +252,12 @@
           b1: 'Análise do banco de dados Adventure Works (empresa fictícia de bicicletas e acessórios).',
           b2: 'Objetivo: modelo analítico global e regional para entender o negócio e melhorar as decisões.',
           b3: 'Ferramentas: SQL Server, Power Query, Power BI e storytelling de KPIs.'
+        },
+        partners: {
+        title: 'Partners Systems — Dashboard',
+        b1: 'Dashboard criada com Streamlit e banco de dados na nuvem.',
+        b2: 'Métricas por país, plano comercial, parceiros ativos/inativos e número de notificações.',
+        b3: 'Modelo de Machine Learning para estimar a taxa real de Churn e gráficos de distribuição. Top 10 parceiros com maior probabilidade de churn.'
         }
       },
       notes: { title: 'Notas e repositórios', latest: 'Mais recentes' },
