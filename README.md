@@ -1,8 +1,13 @@
 ---
+title: "README"
+permalink: /readme-ignore/
+---
+
+
 
 🌐 🇦🇷 Español | 🇬🇧 English | 🇮🇹 Italiano  
 
----
+
 
 ## 🇦🇷 Automatización del Formulario de Contacto y Reportes
 
@@ -24,7 +29,7 @@ Google Apps Script | JavaScript (Fetch API) | HTML | Bootstrap 5 | Google Sheets
 
 ⬆️ Volver al inicio  
 
----
+
 
 ## 🇬🇧 Contact Form & Reporting Automation
 
@@ -46,7 +51,7 @@ Google Apps Script | JavaScript (Fetch API) | HTML | Bootstrap 5 | Google Sheets
 
 ⬆️ Back to top  
 
----
+
 
 ## 🇮🇹 Automazione del Modulo di Contatto e Report
 
@@ -68,4 +73,4 @@ Google Apps Script | JavaScript (Fetch API) | HTML | Bootstrap 5 | Google Sheets
 
 ⬆️ Torna all'inizio  
 
----
+
