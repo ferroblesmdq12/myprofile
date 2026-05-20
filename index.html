@@ -1,335 +1,693 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Fernando Robles | Data Analyst & BI</title>
-  <meta name="description" content="Portafolio de Data Analytics de Fernando Robles: Power BI, SQL, Python, BigQuery, proyectos con impacto de negocio y storytelling de KPIs.">
+
+  <meta name="description"
+    content="Portafolio de Data Analytics de Fernando Robles: Power BI, SQL, Python, BigQuery, proyectos con impacto de negocio y storytelling de KPIs.">
+
   <meta name="author" content="Fernando Raúl Robles">
-  <meta name="keywords" content="Data Analyst, Power BI, SQL, Python, BigQuery, KPIs, Dashboards, ETL, Portfolio">
+
+  <meta name="keywords"
+    content="Data Analyst, Power BI, SQL, Python, BigQuery, KPIs, Dashboards, ETL, Portfolio">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Fernando Robles | Data Analyst & BI">
-  <meta property="og:description" content="Transformo datos en decisiones de negocio con Power BI, SQL y Python.">
+  <meta property="og:description"
+    content="Transformo datos en decisiones de negocio con Power BI, SQL y Python.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="Images/og-image.webp">
+  <meta property="og:image" content="images/og-image.webp">
 
   <!-- Bootstrap & Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rubik+Dirt&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="icon" type="image/x-icon" href="Imagenes/Icono_data.png">
+  <link rel="icon" type="image/x-icon" href="images/Icono_data.png">
+
   <link rel="stylesheet" href="CSS/style_portfolio_final.css">
-  <!-- estilos del formulario de contacto (antes en contacto.html) -->
+
   <link rel="stylesheet" href="CSS/contact.css">
 
   <style>
-    /* Ajustes sutiles para el selector en la navbar */
-    .lang-select { min-width: 120px; }
-    @media (max-width: 767.98px) { .lang-select { width: 100%; } }
+    .lang-select {
+      min-width: 120px;
+    }
+
+    @media (max-width: 767.98px) {
+      .lang-select {
+        width: 100%;
+      }
+    }
   </style>
 </head>
+
 <body>
+
   <!-- Navbar -->
   <nav class="navbar navbar-expand-md navbar-light">
+
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-nav" aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
+
+      <button class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbar-nav"
+        aria-controls="navbar-nav"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+
         <span class="navbar-toggler-icon"></span>
+
       </button>
 
       <div class="collapse navbar-collapse" id="navbar-nav">
+
         <a class="navbar-brand" href="#">
-          <img src="images/Icono_data.png" width="44" height="44" alt="Logo FR">
+          <img src="images/Icono_data.png"
+            width="44"
+            height="44"
+            alt="Logo FR">
         </a>
 
         <ul class="navbar-nav d-flex justify-content-center align-items-center ms-2 gap-2">
-          <li class="nav-item"><a class="nav-link" href="#sobre-mi" data-i18n="nav.about">Sobre mí</a></li>
-          <li class="nav-item"><a class="nav-link" href="#proyectos" data-i18n="nav.projects">Proyectos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#skills" data-i18n="nav.skills">Skills</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contacto" data-i18n="nav.contact">Contacto</a></li>
+
+          <li class="nav-item">
+            <a class="nav-link"
+              href="#sobre-mi"
+              data-i18n="nav.about">
+              Sobre mí
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link"
+              href="#proyectos"
+              data-i18n="nav.projects">
+              Proyectos
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link"
+              href="#skills"
+              data-i18n="nav.skills">
+              Skills
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link"
+              href="#contacto"
+              data-i18n="nav.contact">
+              Contacto
+            </a>
+          </li>
+
         </ul>
 
-        <!-- Lado derecho: selector de idioma + botón CV -->
+        <!-- Selector idioma -->
         <div class="ms-auto d-flex align-items-center gap-2">
+
           <div class="d-flex align-items-center">
+
             <span class="me-1" aria-hidden="true">🌐</span>
-            <label for="langSwitcher" class="visually-hidden">Idioma</label>
-            <select id="langSwitcher" class="form-select form-select-sm lang-select" aria-label="Selector de idioma">
+
+            <label for="langSwitcher" class="visually-hidden">
+              Idioma
+            </label>
+
+            <select id="langSwitcher"
+              class="form-select form-select-sm lang-select"
+              aria-label="Selector de idioma">
+
               <option value="es">Español</option>
               <option value="en">English</option>
               <option value="it">Italiano</option>
               <option value="pt">Português</option>
+
             </select>
+
           </div>
+
           <div class="d-none d-md-block">
-            <a href="File/Fernando_Raul_Robles_CV_Data_Analyst.pdf" class="btn btn-outline-dark btn-sm" target="_blank" rel="noopener" data-i18n="cta.downloadCV">Descargar CV</a>
+
+            <a href="File/Fernando_Raul_Robles_CV_Data_Analyst.pdf"
+              class="btn btn-outline-dark btn-sm"
+              target="_blank"
+              rel="noopener"
+              data-i18n="cta.downloadCV">
+
+              Descargar CV
+
+            </a>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </nav>
 
   <!-- Hero -->
   <header class="hero align-items-stretch">
-    <div class="hero-principal d-flex flex-column justify-content-center align-items-center text-center">
-      <img class="hero-imagen" src="images/foto_cv.jpg" alt="Foto de Fernando Robles">
-      <h1 data-i18n="hero.hi">Hola, soy Fernando</h1>
-      <h2 data-i18n="hero.role">Data Analyst & Business Intelligence</h2>
-      <p data-i18n="hero.pitch">Transformo datos en decisiones de negocio con <strong>Power BI</strong>, <strong>SQL</strong> y <strong>Python</strong>. KPI storytelling + pipelines simples en <strong>BigQuery</strong>.</p>
+
+    <div
+      class="hero-principal d-flex flex-column justify-content-center align-items-center text-center">
+
+      <img class="hero-imagen"
+        src="images/foto_cv.jpg"
+        alt="Foto de Fernando Robles">
+
+      <h1 data-i18n="hero.hi">
+        Hola, soy Fernando
+      </h1>
+
+      <h2 data-i18n="hero.role">
+        Data Analyst & Business Intelligence
+      </h2>
+
+      <p data-i18n="hero.pitch">
+        Transformo datos en decisiones de negocio con
+        <strong>Power BI</strong>,
+        <strong>SQL</strong>
+        y
+        <strong>Python</strong>.
+        KPI storytelling + pipelines simples en
+        <strong>BigQuery</strong>.
+      </p>
+
       <div class="mt-3">
-        <a href="#proyectos" class="btn btn-primary me-2" data-i18n="cta.viewProjects">Ver proyectos</a>
-        <a href="#contacto" class="btn btn-outline-light" data-i18n="cta.letsTalk">Hablemos</a>
+
+        <a href="#proyectos"
+          class="btn btn-primary me-2"
+          data-i18n="cta.viewProjects">
+
+          Ver proyectos
+
+        </a>
+
+        <a href="#contacto"
+          class="btn btn-outline-light"
+          data-i18n="cta.letsTalk">
+
+          Hablemos
+
+        </a>
+
       </div>
+
     </div>
+
     <div class="hero-inferior">
-      <img class="hero-grafico img-fluid" src="images/notebook_dashboard.webp" alt="Ilustración analítica">
+
+      <img class="hero-grafico img-fluid"
+        src="images/notebook_dashboard.webp"
+        alt="Ilustración analítica">
+
     </div>
+
   </header>
 
-  <!-- Sobre mí -->
+  <!-- Sobre mi -->
   <section id="sobre-mi" class="seccion-oscura py-5">
+
     <div class="contenedor text-center">
-      <h2 class="seccion-titulo" data-i18n="about.title">Sobre mí</h2>
+
+      <h2 class="seccion-titulo" data-i18n="about.title">
+        Sobre mí
+      </h2>
+
       <p class="seccion-texto" data-i18n="about.body">
-        Soy <strong>Data Analyst</strong> con foco en <strong>KPIs</strong>, <strong>visualización</strong> y <strong>modelado</strong>. Experiencia construyendo dashboards en <strong>Power BI</strong>, consultas <strong>SQL</strong>, análisis con <strong>Pandas</strong> y procesos <strong>ETL</strong> simples y reproducibles. Formación en SoyHenry (DA) y proyectos reales en salud, deportes y retail.
+
+        Soy
+        <strong>Data Analyst</strong>
+        con foco en
+        <strong>KPIs</strong>,
+        <strong>visualización</strong>
+        y
+        <strong>modelado</strong>.
+
+        Experiencia construyendo dashboards en
+        <strong>Power BI</strong>,
+        consultas
+        <strong>SQL</strong>,
+        análisis con
+        <strong>Pandas</strong>
+        y procesos
+        <strong>ETL</strong>.
+
       </p>
+
     </div>
+
   </section>
 
   <!-- Skills -->
   <section id="skills" class="seccion-clara py-5">
+
     <div class="container text-center">
+
       <div class="row g-4">
+
+        <!-- BI -->
         <div class="col-12 col-md-4">
+
           <div class="columna h-100">
+
             <i class="bi bi-bar-chart-line"></i>
-            <p class="experiencia-titulo" data-i18n="skills.analysis">Análisis & BI</p>
+
+            <p class="experiencia-titulo">
+              Análisis & BI
+            </p>
+
             <div class="badges-contenedor">
+
               <span class="badge text-bg-primary">Power BI</span>
               <span class="badge text-bg-primary">DAX</span>
-              <span class="badge text-bg-primary" data-i18n="skills.powerquery">Power Query</span>
+              <span class="badge text-bg-primary">Power Query</span>
+
             </div>
+
           </div>
+
         </div>
+
+        <!-- SQL -->
         <div class="col-12 col-md-4">
+
           <div class="columna h-100">
+
             <i class="bi bi-database"></i>
-            <p class="experiencia-titulo" data-i18n="skills.data">Datos & SQL</p>
+
+            <p class="experiencia-titulo">
+              Datos & SQL
+            </p>
+
             <div class="badges-contenedor">
+
               <span class="badge text-bg-primary">SQL Server</span>
               <span class="badge text-bg-primary">BigQuery</span>
-              <span class="badge text-bg-primary" data-i18n="skills.star">Modelo Estrella</span>
+              <span class="badge text-bg-primary">Modelo Estrella</span>
+
             </div>
+
           </div>
+
         </div>
+
+        <!-- Python -->
         <div class="col-12 col-md-4">
+
           <div class="columna h-100">
+
             <i class="bi bi-code-slash"></i>
-            <p class="experiencia-titulo">Python</p>
+
+            <p class="experiencia-titulo">
+              Python
+            </p>
+
             <div class="badges-contenedor">
+
               <span class="badge text-bg-primary">Pandas</span>
               <span class="badge text-bg-primary">NumPy</span>
               <span class="badge text-bg-primary">Matplotlib</span>
               <span class="badge text-bg-primary">Seaborn</span>
               <span class="badge text-bg-primary">ETL</span>
+
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- Proyectos (UN solo id="proyectos") -->
+  <!-- Proyectos -->
   <section id="proyectos" class="seccion-clara py-5">
-    <div class="container">
-      <h2 class="seccion-titulo texto-negro text-center" data-i18n="projects.title">Proyectos de Data Analytics</h2>
-      <p class="seccion-descripcion text-center" data-i18n="projects.subtitle">Casos con impacto medible</p>
 
-      <!-- Fila 1 -->
+    <div class="container">
+
+      <h2 class="seccion-titulo texto-negro text-center">
+        Proyectos de Data Analytics
+      </h2>
+
+      <p class="seccion-descripcion text-center">
+        Casos con impacto medible
+      </p>
+
+      <!-- FILA 1 -->
       <div class="row g-4 mt-2">
+
         <!-- Biogenesys -->
         <div class="col-12 col-md-6 col-lg-4">
+
           <div class="card h-100 shadow-sm">
-            <img src="images/Biogenesys.png" class="card-img-top" alt="Dashboard Biogenesys">
+
+            <img src="images/Biogenesys.png"
+              class="card-img-top"
+              alt="Dashboard Biogenesys">
+
             <div class="card-body d-flex flex-column">
-              <h5 class="card-title" data-i18n="projects.biogenesys.title">Biogenesys — Salud LATAM</h5>
+
+              <h5 class="card-title">
+                Biogenesys — Salud LATAM
+              </h5>
+
               <ul class="small mb-3">
-                <li data-i18n="projects.biogenesys.b1">Automatización de limpieza (2.3M filas) con Pandas.</li>
-                <li data-i18n="projects.biogenesys.b2">Refresh del dashboard: <strong>18m → 4m</strong>.</li>
-                <li data-i18n="projects.biogenesys.b3">Identifiqué 3 países con mayor potencial de expansión.</li>
+
+                <li>
+                  Automatización de limpieza (2.3M filas) con Pandas.
+                </li>
+
+                <li>
+                  Refresh del dashboard: <strong>18m → 4m</strong>.
+                </li>
+
+                <li>
+                  Identifiqué 3 países con mayor potencial de expansión.
+                </li>
+
               </ul>
+
               <div class="mt-auto">
-                <a href="https://github.com/ferroblesmdq12/Biogenesys" target="_blank" class="btn btn-outline-dark btn-sm me-2"><i class="bi bi-github"></i> Repo</a>
+
+                <a href="https://github.com/ferroblesmdq12/Biogenesys"
+                  target="_blank"
+                  class="btn btn-outline-dark btn-sm me-2">
+
+                  <i class="bi bi-github"></i> Repo
+
+                </a>
+
               </div>
+
             </div>
+
           </div>
+
         </div>
-        <!-- NBA-StatVision -->
+
+        <!-- NBA -->
         <div class="col-12 col-md-6 col-lg-4">
+
           <div class="card h-100 shadow-sm">
-            <img src="Imagenes/Nba.PNG"card-img-top" alt="Dashboard NBA-StatVision">
+
+            <img src="images/Nba.PNG"
+              class="card-img-top"
+              alt="Dashboard NBA">
+
             <div class="card-body d-flex flex-column">
-              <h5 class="card-title" data-i18n="projects.nba.title">NBA-StatVision — Deportes</h5>
+
+              <h5 class="card-title">
+                NBA-StatVision — Deportes
+              </h5>
+
               <ul class="small mb-3">
-                <li data-i18n="projects.nba.b1">BigQuery: estandarización de 10 temporadas.</li>
-                <li data-i18n="projects.nba.b2">Modelo de lesiones vs. carga de juego.</li>
-                <li data-i18n="projects.nba.b3">Filtros por jugador/equipo con rolling windows.</li>
+
+                <li>
+                  BigQuery: estandarización de 10 temporadas.
+                </li>
+
+                <li>
+                  Modelo de lesiones vs. carga de juego.
+                </li>
+
+                <li>
+                  Rolling windows y filtros avanzados.
+                </li>
+
               </ul>
+
               <div class="mt-auto">
-                <a href="https://github.com/ferroblesmdq12/NBA-StatVision" target="_blank" class="btn btn-outline-dark btn-sm me-2"><i class="bi bi-github"></i> Repo</a>
+
+                <a href="https://github.com/ferroblesmdq12/NBA-StatVision"
+                  target="_blank"
+                  class="btn btn-outline-dark btn-sm me-2">
+
+                  <i class="bi bi-github"></i> Repo
+
+                </a>
+
               </div>
+
             </div>
+
           </div>
+
         </div>
+
         <!-- Senda Café -->
         <div class="col-12 col-md-6 col-lg-4">
+
           <div class="card h-100 shadow-sm">
-            <img src="Imagenes/Logo_café.png" class="card-img-top" alt="Dashboard Senda Café">
+
+            <img src="images/Logo_café.png"
+              class="card-img-top"
+              alt="Dashboard Senda Café">
+
             <div class="card-body d-flex flex-column">
-              <h5 class="card-title" data-i18n="projects.senda.title">Senda Café — Retail</h5>
+
+              <h5 class="card-title">
+                Senda Café — Retail
+              </h5>
+
               <ul class="small mb-3">
-                <li data-i18n="projects.senda.b1">Análisis de ventas, costos y productividad por camarero.</li>
-                <li data-i18n="projects.senda.b2">Alertas de stock y propuesta de turnos óptimos.</li>
-                <li data-i18n="projects.senda.b3">KPIs de margen y rotación mensual.</li>
+
+                <li>
+                  KPIs de ventas, productividad y stock.
+                </li>
+
+                <li>
+                  Alertas automáticas de stock.
+                </li>
+
+                <li>
+                  Métricas de margen y rotación mensual.
+                </li>
+
               </ul>
+
               <div class="mt-auto">
-                <a href="https://github.com/ferroblesmdq12/SendaCafe" target="_blank" class="btn btn-outline-dark btn-sm me-2"><i class="bi bi-github"></i> Repo</a>
+
+                <a href="https://github.com/ferroblesmdq12/SendaCafe"
+                  target="_blank"
+                  class="btn btn-outline-dark btn-sm me-2">
+
+                  <i class="bi bi-github"></i> Repo
+
+                </a>
+
               </div>
+
             </div>
+
           </div>
+
         </div>
+
       </div>
 
-      <!-- Fila 2 -->
+      <!-- FILA 2 -->
       <div class="row g-4 mt-2">
+
         <!-- Adventure Works -->
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="card h-100 shadow-sm">
-            <img src="Imagenes/adventure works.jpg" class="card-img-top" alt="Adventure Works">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title" data-i18n="projects.adventure.title">Adventure Works</h5>
-              <ul class="small mb-3">
-                <li data-i18n="projects.adventure.b1">Análisis de la base de datos Adventure Works (empresa ficticia de bicicletas y accesorios).</li>
-                <li data-i18n="projects.adventure.b2">Modelo analítico global y regional para entender el negocio y mejorar decisiones.</li>
-                <li data-i18n="projects.adventure.b3">SQL Server, Power Query, Power BI y storytelling de KPIs.</li>
-              </ul>
-              <div class="mt-auto">
-                <a href="https://github.com/ferroblesmdq12/AdventureWorks" target="_blank" class="btn btn-outline-dark btn-sm me-2"><i class="bi bi-github"></i> Repo</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Partners Systems -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card h-100 shadow-sm">
-            <img src="Imagenes/dashboard-partners.PNG" class="card-img-top" alt="Dashboard Partners">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title" data-i18n="projects.partners.title">Partners Systems — Dashboard</h5>
-              <ul class="small mb-3">
-                <li data-i18n="projects.partners.b1">Dashboard creado en Streamlit y Base de Datos en la nube.</li>
-                <li data-i18n="projects.partners.b2">Métricas de partners por países, plan comercial, partners, activos e inactivos y cantidad de notificaciones.</li>
-                <li data-i18n="projects.partners.b3">Modelo de ML para obtener la tasa Churn Real y graficos de distribucion de Churn. Top 10 partners con mayor probabilidad de churn.</li>
-              </ul>
-              <div class="mt-auto">
-                <a href="https://github.com/ferroblesmdq12/simiai-ds-tech-challenge" target="_blank" class="btn btn-outline-dark btn-sm me-2"><i class="bi bi-github"></i> Repo</a>
-                <a href="https://dashboard-partners.streamlit.app/" class="btn btn-primary me-2" data-i18n="cta.partners">Dashboard App Web </a>
-            </div> 
-          </div>
-        </div>
-      </div> 
 
-      <!-- CTA a todos los repos -->
-      <div class="text-center mt-4">
-        <a href="https://github.com/ferroblesmdq12?tab=repositories" target="_blank" rel="noopener" class="btn btn-info" data-i18n="projects.allRepos">
-          Ver todos los repos <i class="bi bi-arrow-right-circle-fill"></i>
-        </a>
+          <div class="card h-100 shadow-sm">
+
+            <img src="images/adventure-works.jpg"
+              class="card-img-top"
+              alt="Adventure Works">
+
+            <div class="card-body d-flex flex-column">
+
+              <h5 class="card-title">
+                Adventure Works
+              </h5>
+
+              <ul class="small mb-3">
+
+                <li>
+                  Análisis integral del negocio.
+                </li>
+
+                <li>
+                  KPIs globales y regionales.
+                </li>
+
+                <li>
+                  SQL Server + Power BI.
+                </li>
+
+              </ul>
+
+              <div class="mt-auto">
+
+                <a href="https://github.com/ferroblesmdq12/AdventureWorks"
+                  target="_blank"
+                  class="btn btn-outline-dark btn-sm me-2">
+
+                  <i class="bi bi-github"></i> Repo
+
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Partners -->
+        <div class="col-12 col-md-6 col-lg-4">
+
+          <div class="card h-100 shadow-sm">
+
+            <img src="images/dashboard-partners.PNG"
+              class="card-img-top"
+              alt="Dashboard Partners">
+
+            <div class="card-body d-flex flex-column">
+
+              <h5 class="card-title">
+                Partners Systems — Dashboard
+              </h5>
+
+              <ul class="small mb-3">
+
+                <li>
+                  Dashboard en Streamlit + Cloud DB.
+                </li>
+
+                <li>
+                  Métricas de churn y partners.
+                </li>
+
+                <li>
+                  Machine Learning aplicado a churn.
+                </li>
+
+              </ul>
+
+              <div class="mt-auto">
+
+                <a href="https://github.com/ferroblesmdq12/simiai-ds-tech-challenge"
+                  target="_blank"
+                  class="btn btn-outline-dark btn-sm me-2">
+
+                  <i class="bi bi-github"></i> Repo
+
+                </a>
+
+                <a href="https://dashboard-partners.streamlit.app/"
+                  class="btn btn-primary me-2">
+
+                  Dashboard App Web
+
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
+
+      <!-- TODOS LOS REPOS -->
+      <div class="text-center mt-4">
+
+        <a href="https://github.com/ferroblesmdq12?tab=repositories"
+          target="_blank"
+          rel="noopener"
+          class="btn btn-info">
+
+          Ver todos los repos
+          <i class="bi bi-arrow-right-circle-fill"></i>
+
+        </a>
+
+      </div>
+
     </div>
+
   </section>
 
-
-  <!-- Contacto (formulario integrado) -->
-<section id="contacto" class="seccion-oscura py-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6">
-        <div class="card contact-card">
-          <div class="card-body p-4">
-            <h2 class="card-title text-center mb-4" data-i18n="contactForm.heading">Formulario de Contacto</h2>
-
-            <!-- Alerta de confirmación con botón de cerrar -->
-            <div id="alertSuccess" class="alert alert-success alert-dismissible fade d-none" role="alert">
-              <span data-i18n="contactForm.success">¡Tu mensaje fue enviado correctamente!</span>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-            </div>
-
-            <form id="contactForm" novalidate>
-              <div class="mb-3">
-                <label for="name" class="form-label" data-i18n="contactForm.name">Nombre</label>
-                <input type="text" class="form-control" id="name"
-                       placeholder="Tu nombre" data-i18n-placeholder="contactForm.namePh" required>
-                <div class="invalid-feedback" data-i18n="contactForm.nameError">Por favor ingresa tu nombre.</div>
-              </div>
-
-              <div class="mb-3">
-                <label for="email" class="form-label" data-i18n="contactForm.email">Email</label>
-                <input type="email" class="form-control" id="email"
-                       placeholder="tu@email.com"
-                       data-i18n-placeholder="contactForm.emailPh"
-                       required autocomplete="email" inputmode="email" spellcheck="false">
-                <div class="invalid-feedback" data-i18n="contactForm.emailError">
-                  Por favor ingresa un email válido (ejemplo: usuario@dominio.com).
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label for="message" class="form-label" data-i18n="contactForm.message">Nota</label>
-                <textarea class="form-control" id="message" rows="5"
-                          placeholder="Escribe tu mensaje..."
-                          data-i18n-placeholder="contactForm.messagePh" required></textarea>
-                <div class="invalid-feedback" data-i18n="contactForm.messageError">Por favor ingresa un mensaje.</div>
-              </div>
-
-              <div class="d-grid">
-                <button type="submit" class="btn btn-primary btn-lg" data-i18n="contactForm.send">Enviar</button>
-              </div>
-            </form>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
   <!-- Footer -->
-  <footer class="seccion-oscura d-flex flex-column align-items-center justify-content-center">
-    <p class="footer-texto text-center" data-i18n="footer.quote">“Cada dato esconde una historia… mi trabajo es descubrirla.”</p>
-    <img class="footer-logo" src="Imagenes/notebook_dashboard.webp" alt="logo">
-    <div class="iconos-redes-sociales d-flex flex-wrap align-items-center justify-content-center">
-      <a href="https://www.linkedin.com/in/fernando-robles-bbb214223/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i></a>
-      <a href="https://github.com/ferroblesmdq12" target="_blank" rel="noopener"><i class="bi bi-github"></i></a>
+  <footer
+    class="seccion-oscura d-flex flex-column align-items-center justify-content-center">
+
+    <p class="footer-texto text-center">
+      “Cada dato esconde una historia… mi trabajo es descubrirla.”
+    </p>
+
+    <img class="footer-logo"
+      src="images/notebook_dashboard.webp"
+      alt="logo">
+
+    <div
+      class="iconos-redes-sociales d-flex flex-wrap align-items-center justify-content-center">
+
+      <a href="https://www.linkedin.com/in/fernando-robles-bbb214223/"
+        target="_blank"
+        rel="noopener">
+
+        <i class="bi bi-linkedin"></i>
+
+      </a>
+
+      <a href="https://github.com/ferroblesmdq12"
+        target="_blank"
+        rel="noopener">
+
+        <i class="bi bi-github"></i>
+
+      </a>
+
     </div>
-    <div class="derechos-de-autor" data-i18n="footer.rights">Creado por Fernando Robles (2025) ©</div>
+
+    <div class="derechos-de-autor">
+      Creado por Fernando Robles (2025) ©
+    </div>
+
   </footer>
 
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- i18n / tracking -->
   <script src="JS/assets/js/i18n-inline.js"></script>
-  <script src="JS/assets/js/track.js"></script>
-  <!-- <script src="JS/assets/js/i18n-contact.js"></script> -->
 
-  <!-- validación y envío del formulario (antes en contacto.html) -->
+  <script src="JS/assets/js/track.js"></script>
+
   <script src="JS/assets/js/contact.js"></script>
- 
+
 </body>
+
 </html>
