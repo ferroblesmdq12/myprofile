@@ -1,92 +1,59 @@
+// Keep the existing Apps Script contract; report success only after backend confirmation.
 (() => {
-  // 👉 Tu URL de la Web App (de Apps Script)
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwwhVfkGW7tj8zs_52e27yss-v0e1rG48cHAudDOkqBQqFqyGZzEOJ_26cXD4Zk6Cs/exec";
-
-  // Referencias a los elementos del formulario
-  const form        = document.getElementById("contactForm");
-  const nameEl      = document.getElementById("name");
-  const emailEl     = document.getElementById("email");
-  const messageEl   = document.getElementById("message");
-  const sendBtn     = form.querySelector("button[type='submit']");
-  const alertSuccess= document.getElementById("alertSuccess");
-
-  // Creamos un honeypot oculto para bots (aunque no esté en HTML)
-  const potEl = document.createElement("input");
-  potEl.type = "text";
-  potEl.name = "company";
-  potEl.id = "company";
-  potEl.style.display = "none";
-  form.appendChild(potEl);
-
-  // Validación básica
-  const emailOK = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v).toLowerCase());
-
-  const showSuccess = () => {
-    alertSuccess.classList.remove("d-none");
-    alertSuccess.classList.add("show");
-    setTimeout(() => {
-      try {
-        const bsAlert = bootstrap.Alert.getOrCreateInstance(alertSuccess);
-        bsAlert.close();
-      } catch {}
-    }, 6000);
+  const endpoint = 'https://script.google.com/macros/s/AKfycbwwhVfkGW7tj8zs_52e27yss-v0e1rG48cHAudDOkqBQqFqyGZzEOJ_26cXD4Zk6Cs/exec';
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  const button = form.querySelector('button[type="submit"]');
+  const status = document.getElementById('formStatus');
+  const messages = {
+    es: { sending: 'Enviando…', success: '✓ Tu mensaje se envió correctamente. Gracias por contactarme.', error: 'No se pudo confirmar el envío. Inténtalo de nuevo o escríbeme por LinkedIn.', invalid: 'Completa tu nombre, email y mensaje.' },
+    en: { sending: 'Sending…', success: '✓ Your message was sent successfully. Thank you for getting in touch.', error: 'Delivery could not be confirmed. Please try again or contact me on LinkedIn.', invalid: 'Please enter your name, email and message.' },
+    it: { sending: 'Invio…', success: '✓ Messaggio inviato. Grazie per avermi contattato.', error: 'Invio non confermato. Riprova o contattami su LinkedIn.', invalid: 'Inserisci nome, email e messaggio.' },
+    pt: { sending: 'Enviando…', success: '✓ Mensagem enviada. Obrigado pelo contato.', error: 'Não foi possível confirmar o envio. Tente novamente ou fale comigo pelo LinkedIn.', invalid: 'Preencha seu nome, email e mensagem.' }
   };
-
-  const showError = (msg) => {
-    alert(msg || "No se pudo enviar el formulario. Intenta nuevamente.");
-  };
-
-  // Evento submit
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    [nameEl, emailEl, messageEl].forEach(el => el.classList.remove("is-invalid"));
-
-    const name = nameEl.value.trim();
-    const email = emailEl.value.trim();
-    const message = messageEl.value.trim();
-
-    let hasError = false;
-    if (!name) { nameEl.classList.add("is-invalid"); hasError = true; }
-    if (!email || !emailOK(email)) { emailEl.classList.add("is-invalid"); hasError = true; }
-    if (!message) { messageEl.classList.add("is-invalid"); hasError = true; }
-    if (hasError) return;
-
-    if (potEl.value) return; // Bot detectado
-
-    const prevText = sendBtn.textContent;
-    sendBtn.disabled = true;
-    sendBtn.textContent = "Enviando...";
-
+  const copy = () => messages[document.documentElement.lang] || messages.es;
+  let pending = false;
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (pending || form.elements.company.value) return;
+    status.textContent = '';
+    status.classList.remove('error');
+    if (!form.reportValidity()) return;
+    const name = form.elements.name.value.trim();
+    const email = form.elements.email.value.trim();
+    const message = form.elements.message.value.trim();
+    if (!name || !email || !message) { status.textContent = copy().invalid; return; }
+    const label = button.querySelector('[data-t="send"]');
+    pending = true;
+    button.disabled = true;
+    form.setAttribute('aria-busy', 'true');
+    const previous = label.textContent;
+    label.textContent = copy().sending;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 25000);
     try {
-      const fd = new FormData();
-      fd.append("name", name);
-      fd.append("email", email);
-      fd.append("message", message);
-      fd.append("page", location.href);
-      fd.append("userAgent", navigator.userAgent || "");
-      fd.append("company", potEl.value || "");
-
-      const resp = await fetch(WEB_APP_URL, {
-        method: "POST",
-        body: fd
-      });
-
-      let data = {};
-      try { data = await resp.json(); } catch(_) {}
-
-      if (resp.ok && data.ok) {
-        form.reset();
-        showSuccess();
-      } else {
-        showError(data.error || "No se pudo enviar el mensaje.");
-      }
-    } catch (err) {
-      console.error(err);
-      showError("Error de red. Intenta nuevamente.");
+      const data = new FormData();
+      data.append('name', name);
+      data.append('email', email);
+      data.append('message', message);
+      data.append('page', location.href);
+      data.append('userAgent', navigator.userAgent || '');
+      data.append('company', '');
+      const response = await fetch(endpoint, { method: 'POST', body: data, signal: controller.signal });
+      const result = await response.json();
+      if (!response.ok || result.ok !== true) throw new Error('Delivery not confirmed');
+      form.reset();
+      status.textContent = copy().success;
+    } catch {
+      status.classList.add('error');
+      status.textContent = copy().error;
     } finally {
-      sendBtn.disabled = false;
-      sendBtn.textContent = prevText;
+      clearTimeout(timeout);
+      pending = false;
+      button.disabled = false;
+      form.removeAttribute('aria-busy');
+      const translated = { es: 'Enviar mensaje', en: 'Send message', it: 'Invia messaggio', pt: 'Enviar mensagem' };
+      label.textContent = translated[document.documentElement.lang] || previous;
     }
   });
 })();
