@@ -6,6 +6,7 @@
   const button = form.querySelector('button[type="submit"]');
   const status = document.getElementById('formStatus');
   const messages = {
+    de: { sending: 'Wird gesendet…', success: '✓ Ihre Nachricht wurde gesendet. Vielen Dank für Ihre Kontaktaufnahme.', error: 'Der Versand konnte nicht bestätigt werden. Bitte versuchen Sie es erneut oder kontaktieren Sie mich über LinkedIn.', invalid: 'Bitte geben Sie Ihren Namen, Ihre E-Mail-Adresse und eine Nachricht ein.' },
     es: { sending: 'Enviando…', success: '✓ Tu mensaje se envió correctamente. Gracias por contactarme.', error: 'No se pudo confirmar el envío. Inténtalo de nuevo o escríbeme por LinkedIn.', invalid: 'Completa tu nombre, email y mensaje.' },
     en: { sending: 'Sending…', success: '✓ Your message was sent successfully. Thank you for getting in touch.', error: 'Delivery could not be confirmed. Please try again or contact me on LinkedIn.', invalid: 'Please enter your name, email and message.' },
     it: { sending: 'Invio…', success: '✓ Messaggio inviato. Grazie per avermi contattato.', error: 'Invio non confermato. Riprova o contattami su LinkedIn.', invalid: 'Inserisci nome, email e messaggio.' },
@@ -52,7 +53,7 @@
       pending = false;
       button.disabled = false;
       form.removeAttribute('aria-busy');
-      const translated = { es: 'Enviar mensaje', en: 'Send message', it: 'Invia messaggio', pt: 'Enviar mensagem' };
+      const translated = { es: 'Enviar mensaje', en: 'Send message', it: 'Invia messaggio', pt: 'Enviar mensagem', de: 'Nachricht senden' };
       label.textContent = translated[document.documentElement.lang] || previous;
     }
   });
